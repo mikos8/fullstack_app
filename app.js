@@ -5,8 +5,10 @@ const analiticsRoutes = require('./routes/analitics')
 const categoryRoutes = require('./routes/category')
 const orderRoutes = require('./routes/order')
 const positionRoutes = require('./routes/position')
+const bodyParser = require('body-parser')
 
-
+app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.json())
 app.use('/api/auth',authRoutes)
 app.use('/api/analitics',analiticsRoutes)
 app.use('/api/category',categoryRoutes)

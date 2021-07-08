@@ -6,9 +6,14 @@ const categoryRoutes = require('./routes/category')
 const orderRoutes = require('./routes/order')
 const positionRoutes = require('./routes/position')
 const bodyParser = require('body-parser')
+const cors = require('cors'); // мог обрабатывать корс 
+const morgan = require('morgan') // красиво логировать процесыы
 
+app.use(morgan('dev'))
+app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
+
 app.use('/api/auth',authRoutes)
 app.use('/api/analitics',analiticsRoutes)
 app.use('/api/category',categoryRoutes)

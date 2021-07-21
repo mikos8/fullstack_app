@@ -8,14 +8,20 @@ const positionRoutes = require('./routes/position')
 const bodyParser = require('body-parser')
 const cors = require('cors'); // мог обрабатывать корс 
 const morgan = require('morgan') // красиво логировать процесыы
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const config = require('./config/keys')
+
+/*Подключение БД Монго */
+mongoose.connect(config.db)
+mongoose.connection.on('connected', () => {
+    console.log('conected BD')
+})
+mongoose.connection.on('error', (err) => {
+    console.log('error not connected', err)
+})
 
 
-mongoose.connect('srv://cluster0.t1ug3.mongodb.net/fullstack')
-    .then(() => {
-        console.log('MongoDB conected');
-    })
-    .catch(error=>console.log(error))
+
 app.use(morgan('dev'))
 app.use(cors())
 app.use(bodyParser.urlencoded({
